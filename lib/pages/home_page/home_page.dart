@@ -9,6 +9,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Map<String, dynamic>> _subjects = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSubjects();
+  }
+
+  void _loadSubjects() async {
+    List<Map<String, dynamic>> subjects = await subjectServiceGetSubjects();
+    setState(() {
+      _subjects = subjects;
+    });
+  }
+
   void _createSubject() async {
     TextEditingController subjectController = TextEditingController();
     showDialog(
@@ -34,6 +49,7 @@ class _HomePageState extends State<HomePage> {
                 if (subjectName.isNotEmpty) {
                   await subjectServiceCreateSubject(subjectName);
                   Navigator.of(context).pop();
+                  _loadSubjects(); // Reload subjects after creating a new one
                 }
               },
             ),
@@ -52,8 +68,18 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text('Welcome to HomeMentor!'),
+          children: [
+            if (_subjects.isEmpty) const Text('Welcome to HomeMentor!'),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _subjects.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(_subjects[index]['name']),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

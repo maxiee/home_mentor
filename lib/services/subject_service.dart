@@ -4,3 +4,7 @@ Future<bool> subjectServiceCreateSubject(String name) async {
   await supabaseClient.from('subjects').insert({'name': name});
   return true;
 }
+
+Future<List<Map<String, dynamic>>> subjectServiceGetSubjects() async {
+  return await supabaseClient.from('subjects').select();
+}

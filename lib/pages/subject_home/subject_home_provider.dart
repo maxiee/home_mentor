@@ -9,4 +9,9 @@ class SubjectHomeProvider with ChangeNotifier {
     _currentSubject = subject;
     notifyListeners();
   }
+
+  void updateBackground(String background) {
+    _currentSubject!['background'] = background;
+    notifyListeners();
+  }
 }

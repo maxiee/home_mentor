@@ -13,9 +13,9 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SupaEmailAuth(onSignInComplete: (response) {
-        // Navigate to home page
+        Navigator.of(context).pushReplacementNamed('/home');
       }, onSignUpComplete: (response) {
-        // Navigate to home page
+        Navigator.of(context).pushReplacementNamed('/home');
       }),
     );
   }

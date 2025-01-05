@@ -8,12 +8,12 @@ class SubjectHome extends StatefulWidget {
 }
 
 class _SubjectHomeState extends State<SubjectHome> {
-  late final Map<String, dynamic> subject;
+  Map<String, dynamic>? subject;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    subject =
+    subject ??=
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
   }
 
@@ -21,7 +21,7 @@ class _SubjectHomeState extends State<SubjectHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(subject['name']),
+        title: Text(subject?['name'] ?? ""),
       ),
       body: ListView(
         children: [
@@ -46,7 +46,8 @@ class _SubjectHomeState extends State<SubjectHome> {
           ListTile(
             title: const Text('编写背景'),
             onTap: () {
-              // Handle navigation to 编写背景
+              Navigator.of(context).pushNamed('/subject_edit_background',
+                  arguments: subject?['background'] ?? "");
             },
           ),
         ],

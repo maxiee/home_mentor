@@ -44,6 +44,9 @@ class _SplashPageState extends State<SplashPage> {
     Future(() async {
       if (userServiceIsLoggedIn()) {
         // Navigate to home page
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed('/home');
+        }
       } else {
         // Navigate to login page
         if (mounted) {

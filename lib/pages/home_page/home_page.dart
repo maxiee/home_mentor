@@ -83,7 +83,10 @@ class _HomePageState extends State<HomePage> {
                     subtitle: Text('Subject ID: ${_subjects[index]['id']}'),
                     trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey),
                     onTap: () {
-                      // Add your onTap functionality here
+                      Navigator.of(context).pushNamed(
+                        '/subject',
+                        arguments: _subjects[index],
+                      );
                     },
                   );
                 },

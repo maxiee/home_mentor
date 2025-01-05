@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_mentor/pages/home_page/home_page.dart';
 import 'package:home_mentor/pages/login/login_page.dart';
+import 'package:home_mentor/pages/subject_home/subject_home.dart';
 import 'package:home_mentor/services/supabase_service.dart';
 import 'package:home_mentor/services/user_service.dart';
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
+        '/subject': (context) => const SubjectHome(),
       },
       home: const SplashPage(),
     );

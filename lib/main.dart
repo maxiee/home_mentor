@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:home_mentor/pages/login/login_page.dart';
 import 'package:home_mentor/services/supabase_service.dart';
 import 'package:home_mentor/services/user_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  supabaseServiceInit();
+  await supabaseServiceInit();
   runApp(const MyApp());
 }
 
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      routes: {
+        '/login': (context) => const LoginPage(),
+      },
       home: const SplashPage(),
     );
   }
@@ -40,6 +44,9 @@ class _SplashPageState extends State<SplashPage> {
         // Navigate to home page
       } else {
         // Navigate to login page
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed('/login');
+        }
       }
     });
   }

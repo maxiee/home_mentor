@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: const Text('Home Mentor'),
       ),
       body: Center(
         child: Column(
@@ -75,7 +75,16 @@ class _HomePageState extends State<HomePage> {
                 itemCount: _subjects.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(_subjects[index]['name']),
+                    leading: Icon(Icons.book, color: Colors.blue),
+                    title: Text(
+                      _subjects[index]['name'],
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text('Subject ID: ${_subjects[index]['id']}'),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey),
+                    onTap: () {
+                      // Add your onTap functionality here
+                    },
                   );
                 },
               ),

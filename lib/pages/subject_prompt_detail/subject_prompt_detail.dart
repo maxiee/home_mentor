@@ -51,50 +51,79 @@ class _SubjectPromptDetailPageState extends State<SubjectPromptDetailPage> {
       appBar: AppBar(
         title: Text(promptName!),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Text('Prompt: '),
-            Text(finalPrompt),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: _controller1,
-              decoration: const InputDecoration(
-                labelText: '\$1',
-                border: OutlineInputBorder(),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text('Prompt: '),
+                  Text(finalPrompt),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
               ),
-              maxLines: 8,
-              style: const TextStyle(color: Colors.black),
-              textInputAction: TextInputAction.done,
-              keyboardType: TextInputType.multiline,
             ),
-            const SizedBox(
-              height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                TextField(
+                  controller: _controller1,
+                  decoration: const InputDecoration(
+                    labelText: '\$1',
+                    border: OutlineInputBorder(),
+                  ),
+                  maxLines: 2,
+                  style: const TextStyle(color: Colors.black),
+                  textInputAction: TextInputAction.done,
+                  keyboardType: TextInputType.multiline,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      // 按钮：手动粘贴至 LLM 网站进行询问
+                      ElevatedButton(
+                        onPressed: () {
+                          // submit
+                          final wholePrompt =
+                              finalPrompt.replaceAll('\$1', _controller1.text);
+                          // copy to clipboard
+                          Clipboard.setData(ClipboardData(text: wholePrompt));
+                          // show snackbar
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Copied to clipboard'),
+                            ),
+                          );
+                        },
+                        child: const Text('手动粘贴至 LLM 网站询问'),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      // 按钮：自动调用 OpenAPI 接口进行询问（花钱）
+                      // 创建一个空按钮，接口调用先空着
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: const Text('自动调用 AI 接口询问'),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // submit
-            final wholePrompt =
-                finalPrompt.replaceAll('\$1', _controller1.text);
-            // copy to clipboard
-            Clipboard.setData(ClipboardData(text: wholePrompt));
-            // show snackbar
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Copied to clipboard'),
-              ),
-            );
-          },
-          child: const Icon(Icons.check)),
     );
   }
 }

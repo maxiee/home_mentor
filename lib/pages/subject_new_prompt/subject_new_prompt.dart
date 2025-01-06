@@ -70,7 +70,8 @@ class _SubjectNewPromptPageState extends State<SubjectNewPromptPage> {
           String content = controller.text;
           if (name.isNotEmpty && content.isNotEmpty) {
             subjectServiceAddPrompt(
-                Provider.of<SubjectHomeProvider>(context).currentSubject?['id'],
+                Provider.of<SubjectHomeProvider>(context, listen: false)
+                    .currentSubject?['id'],
                 name,
                 content);
             if (context.mounted) {

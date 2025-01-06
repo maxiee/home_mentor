@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
+import 'package:home_mentor/pages/subject_home/subject_home_provider.dart';
+import 'package:provider/provider.dart';
 
 class SubjectNewPromptPage extends StatefulWidget {
   const SubjectNewPromptPage({super.key});
@@ -23,9 +25,16 @@ class _SubjectNewPromptPageState extends State<SubjectNewPromptPage> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 10,
+            ),
+            Text('关联 Subject: ' +
+                Provider.of<SubjectHomeProvider>(context)
+                    .currentSubject?['name']),
+            SizedBox(
+              height: 20,
             ),
             TextField(
               controller: nameController,
@@ -46,6 +55,11 @@ class _SubjectNewPromptPageState extends State<SubjectNewPromptPage> {
               ),
               maxLines: 8, // Set default number of lines to 8
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Text("\"\$background\" 表示在此处嵌入背景内容。"),
+            Text("\"\$1\"、\"\$2\"…… 表示未来用户动态输入的内容。"),
           ],
         ),
       ),

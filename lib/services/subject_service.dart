@@ -23,3 +23,8 @@ Future<void> subjectServiceAddPrompt(
     'prompt': prompt,
   });
 }
+
+Future<List<Map<String, dynamic>>> subjectServiceGetPrompts(
+    int subjectId) async {
+  return await supabaseClient.from('prompts').select().eq('subject', subjectId);
+}

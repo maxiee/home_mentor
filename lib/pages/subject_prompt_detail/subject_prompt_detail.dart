@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_quill/quill_delta.dart';
 import 'package:home_mentor/pages/subject_home/subject_home_provider.dart';
 import 'package:markdown_quill/markdown_quill.dart';
@@ -69,7 +70,6 @@ class _SubjectPromptDetailPageState extends State<SubjectPromptDetailPage> {
                 border: OutlineInputBorder(),
               ),
               maxLines: 8,
-              readOnly: true,
               style: const TextStyle(color: Colors.black),
               textInputAction: TextInputAction.done,
               keyboardType: TextInputType.multiline,
@@ -80,6 +80,21 @@ class _SubjectPromptDetailPageState extends State<SubjectPromptDetailPage> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // submit
+            final wholePrompt =
+                finalPrompt.replaceAll('\$1', _controller1.text);
+            // copy to clipboard
+            Clipboard.setData(ClipboardData(text: wholePrompt));
+            // show snackbar
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Copied to clipboard'),
+              ),
+            );
+          },
+          child: const Icon(Icons.check)),
     );
   }
 }

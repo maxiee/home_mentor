@@ -14,3 +14,12 @@ Future<void> subjectServiceUpdateBackground(int id, String background) async {
       .from('subjects')
       .update({'background': background}).eq('id', id);
 }
+
+Future<void> subjectServiceAddPrompt(
+    int subjectId, String promptName, String prompt) async {
+  await supabaseClient.from('prompts').insert({
+    'subject': subjectId,
+    'name': promptName,
+    'prompt': prompt,
+  });
+}

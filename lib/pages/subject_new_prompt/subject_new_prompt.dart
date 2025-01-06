@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_code_editor/flutter_code_editor.dart';
 import 'package:home_mentor/pages/subject_home/subject_home_provider.dart';
+import 'package:home_mentor/services/subject_service.dart';
 import 'package:provider/provider.dart';
 
 class SubjectNewPromptPage extends StatefulWidget {
@@ -64,12 +64,21 @@ class _SubjectNewPromptPageState extends State<SubjectNewPromptPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           // Handle saving the new prompt
           String name = nameController.text;
           String content = controller.text;
           if (name.isNotEmpty && content.isNotEmpty) {
-            // Save the new prompt
+            subjectServiceAddPrompt(
+                Provider.of<SubjectHomeProvider>(context).currentSubject?['id'],
+                name,
+                content);
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('保存成功')),
+              );
+            }
+            Navigator.of(context).pop();
           }
         },
         child: const Icon(Icons.save),

@@ -47,7 +47,10 @@ class _SubjectPromptListPageState extends State<SubjectPromptListPage> {
                   title: Text(prompt['name']),
                   subtitle: Text(prompt['prompt']),
                   onTap: () {
-                    // Handle navigation to prompt detail page
+                    Navigator.of(context).pushNamed(
+                      '/subject_prompt_detail',
+                      arguments: prompt,
+                    );
                   },
                 );
               },

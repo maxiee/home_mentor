@@ -5,6 +5,7 @@ import 'package:home_mentor/pages/subject_edit_background/subject_edit_backgroun
 import 'package:home_mentor/pages/subject_home/subject_home.dart';
 import 'package:home_mentor/pages/subject_home/subject_home_provider.dart';
 import 'package:home_mentor/pages/subject_new_prompt/subject_new_prompt.dart';
+import 'package:home_mentor/pages/subject_prompt_detail/subject_prompt_detail.dart';
 import 'package:home_mentor/pages/subject_prompt_list/subject_prompt_list.dart';
 import 'package:home_mentor/services/supabase_service.dart';
 import 'package:home_mentor/services/user_service.dart';
@@ -39,6 +40,8 @@ class MyApp extends StatelessWidget {
               const SubjectEditBackgroundPage(),
           '/subject_new_prompt': (context) => const SubjectNewPromptPage(),
           '/subject_prompt_list': (context) => const SubjectPromptListPage(),
+          '/subject_prompt_detail': (context) =>
+              const SubjectPromptDetailPage(),
         },
         home: const SplashPage(),
       ),

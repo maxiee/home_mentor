@@ -39,6 +39,7 @@ dependencies:
   supabase_auth_ui: ^0.5.4
   flutter_quill: ^10.8.5
   provider: ^6.1.2
+  markdown_quill: ^4.2.0
 
 dev_dependencies:
   flutter_test:

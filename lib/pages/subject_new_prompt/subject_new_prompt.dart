@@ -49,6 +49,17 @@ class _SubjectNewPromptPageState extends State<SubjectNewPromptPage> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Handle saving the new prompt
+          String name = nameController.text;
+          String content = controller.text;
+          if (name.isNotEmpty && content.isNotEmpty) {
+            // Save the new prompt
+          }
+        },
+        child: const Icon(Icons.save),
+      ),
     );
   }
 }

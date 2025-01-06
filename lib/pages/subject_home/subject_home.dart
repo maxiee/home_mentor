@@ -29,7 +29,7 @@ class _SubjectHomeState extends State<SubjectHome> {
           ListTile(
             title: const Text('Prompt 列表'),
             onTap: () {
-              // Handle navigation to Prompt 列表
+              Navigator.of(context).pushNamed('/subject_prompt_list');
             },
           ),
           ListTile(

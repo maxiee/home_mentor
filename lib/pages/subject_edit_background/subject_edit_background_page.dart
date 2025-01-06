@@ -40,33 +40,31 @@ class _SubjectEditBackgroundPageState extends State<SubjectEditBackgroundPage> {
       appBar: AppBar(
         title: const Text('编写背景'),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            QuillSimpleToolbar(
-              controller: _controller,
-              configurations: const QuillSimpleToolbarConfigurations(),
-            ),
-            Expanded(
-                child: QuillEditor.basic(
-                    controller: _controller,
-                    configurations: QuillEditorConfigurations(
-                      expands: true,
-                      // customStyles: DefaultStyles.getInstance(context).merge(
-                      //   DefaultStyles(
-                      //       h1: DefaultTextBlockStyle(
-                      //           TextStyle(
-                      //               fontSize: 34,
-                      //               fontWeight: FontWeight.bold,
-                      //               height: 1.4),
-                      //           HorizontalSpacing(0, 0),
-                      //           VerticalSpacing(16, 8),
-                      //           VerticalSpacing.zero,
-                      //           null)),
-                      // ),
-                    )))
-          ],
-        ),
+      body: Column(
+        children: [
+          QuillSimpleToolbar(
+            controller: _controller,
+            configurations: const QuillSimpleToolbarConfigurations(),
+          ),
+          Expanded(
+              child: QuillEditor.basic(
+                  controller: _controller,
+                  configurations: QuillEditorConfigurations(
+                    expands: true,
+                    // customStyles: DefaultStyles.getInstance(context).merge(
+                    //   DefaultStyles(
+                    //       h1: DefaultTextBlockStyle(
+                    //           TextStyle(
+                    //               fontSize: 34,
+                    //               fontWeight: FontWeight.bold,
+                    //               height: 1.4),
+                    //           HorizontalSpacing(0, 0),
+                    //           VerticalSpacing(16, 8),
+                    //           VerticalSpacing.zero,
+                    //           null)),
+                    // ),
+                  )))
+        ],
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () async {

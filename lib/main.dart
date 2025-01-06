@@ -3,8 +3,10 @@ import 'package:home_mentor/pages/home_page/home_page.dart';
 import 'package:home_mentor/pages/login/login_page.dart';
 import 'package:home_mentor/pages/subject_edit_background/subject_edit_background_page.dart';
 import 'package:home_mentor/pages/subject_home/subject_home.dart';
+import 'package:home_mentor/pages/subject_home/subject_home_provider.dart';
 import 'package:home_mentor/services/supabase_service.dart';
 import 'package:home_mentor/services/user_service.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,20 +19,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'HomeMentor',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => SubjectHomeProvider())
+      ],
+      child: MaterialApp(
+        title: 'HomeMentor',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        routes: {
+          '/login': (context) => const LoginPage(),
+          '/home': (context) => const HomePage(),
+          '/subject': (context) => const SubjectHome(),
+          '/subject_edit_background': (context) =>
+              const SubjectEditBackgroundPage(),
+        },
+        home: const SplashPage(),
       ),
-      routes: {
-        '/login': (context) => const LoginPage(),
-        '/home': (context) => const HomePage(),
-        '/subject': (context) => const SubjectHome(),
-        '/subject_edit_background': (context) =>
-            const SubjectEditBackgroundPage(),
-      },
-      home: const SplashPage(),
     );
   }
 }

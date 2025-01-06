@@ -8,3 +8,9 @@ Future<bool> subjectServiceCreateSubject(String name) async {
 Future<List<Map<String, dynamic>>> subjectServiceGetSubjects() async {
   return await supabaseClient.from('subjects').select();
 }
+
+Future<void> subjectServiceUpdateBackground(int id, String background) async {
+  await supabaseClient
+      .from('subjects')
+      .update({'background': background}).eq('id', id);
+}

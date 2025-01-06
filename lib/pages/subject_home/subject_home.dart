@@ -10,56 +10,43 @@ class SubjectHome extends StatefulWidget {
 }
 
 class _SubjectHomeState extends State<SubjectHome> {
-  final subjectHomeProvider = SubjectHomeProvider();
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (subjectHomeProvider.currentSubject == null) {
-      subjectHomeProvider.setCurrentSubject(
-          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => subjectHomeProvider,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(subjectHomeProvider.currentSubject?['name'] ?? ""),
-        ),
-        body: ListView(
-          children: [
-            ListTile(
-              title: const Text('问答历史'),
-              onTap: () {
-                // Handle navigation to 问答历史
-              },
-            ),
-            ListTile(
-              title: const Text('Prompt 列表'),
-              onTap: () {
-                // Handle navigation to Prompt 列表
-              },
-            ),
-            ListTile(
-              title: const Text('新 Prompt'),
-              onTap: () {
-                // Handle navigation to 新 Prompt
-              },
-            ),
-            ListTile(
-              title: const Text('编写背景'),
-              onTap: () {
-                Navigator.of(context).pushNamed('/subject_edit_background',
-                    arguments:
-                        subjectHomeProvider.currentSubject?['background'] ??
-                            "");
-              },
-            ),
-          ],
-        ),
+    SubjectHomeProvider subjectHomeProvider =
+        Provider.of<SubjectHomeProvider>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(subjectHomeProvider.currentSubject?['name'] ?? ""),
+      ),
+      body: ListView(
+        children: [
+          ListTile(
+            title: const Text('问答历史'),
+            onTap: () {
+              // Handle navigation to 问答历史
+            },
+          ),
+          ListTile(
+            title: const Text('Prompt 列表'),
+            onTap: () {
+              // Handle navigation to Prompt 列表
+            },
+          ),
+          ListTile(
+            title: const Text('新 Prompt'),
+            onTap: () {
+              // Handle navigation to 新 Prompt
+            },
+          ),
+          ListTile(
+            title: const Text('编写背景'),
+            onTap: () {
+              Navigator.of(context).pushNamed('/subject_edit_background',
+                  arguments:
+                      subjectHomeProvider.currentSubject?['background'] ?? "");
+            },
+          ),
+        ],
       ),
     );
   }

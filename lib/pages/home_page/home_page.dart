@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:home_mentor/pages/subject_home/subject_home_provider.dart';
 import 'package:home_mentor/services/subject_service.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -48,7 +50,9 @@ class _HomePageState extends State<HomePage> {
                 String subjectName = subjectController.text;
                 if (subjectName.isNotEmpty) {
                   await subjectServiceCreateSubject(subjectName);
-                  Navigator.of(context).pop();
+                  if (context.mounted) {
+                    Navigator.of(context).pop();
+                  }
                   _loadSubjects(); // Reload subjects after creating a new one
                 }
               },
@@ -83,10 +87,11 @@ class _HomePageState extends State<HomePage> {
                     subtitle: Text('Subject ID: ${_subjects[index]['id']}'),
                     trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey),
                     onTap: () {
-                      Navigator.of(context).pushNamed(
-                        '/subject',
-                        arguments: _subjects[index],
-                      );
+                      SubjectHomeProvider subjectHomeProvider =
+                          Provider.of<SubjectHomeProvider>(context,
+                              listen: false);
+                      subjectHomeProvider.setCurrentSubject(_subjects[index]);
+                      Navigator.of(context).pushNamed('/subject');
                     },
                   );
                 },

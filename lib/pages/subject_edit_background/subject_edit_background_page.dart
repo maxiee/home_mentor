@@ -19,9 +19,13 @@ class _SubjectEditBackgroundPageState extends State<SubjectEditBackgroundPage> {
   @override
   void initState() {
     super.initState();
-    _controller.document = Document.fromJson(jsonDecode(
-        Provider.of<SubjectHomeProvider>(context, listen: false)
-            .currentSubject?['background']));
+    if (Provider.of<SubjectHomeProvider>(context, listen: false)
+            .currentSubject?['background'] !=
+        null) {
+      _controller.document = Document.fromJson(jsonDecode(
+          Provider.of<SubjectHomeProvider>(context, listen: false)
+              .currentSubject?['background']));
+    }
   }
 
   @override
@@ -53,9 +57,9 @@ class _SubjectEditBackgroundPageState extends State<SubjectEditBackgroundPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
+          onPressed: () async {
             // Save the background
-            Provider.of<SubjectHomeProvider>(context, listen: false)
+            await Provider.of<SubjectHomeProvider>(context, listen: false)
                 .updateBackground(
                     jsonEncode(_controller.document.toDelta().toJson()));
           },

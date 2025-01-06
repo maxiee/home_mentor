@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:home_mentor/services/subject_service.dart';
 
 class SubjectHomeProvider with ChangeNotifier {
   Map<String, dynamic>? _currentSubject;
@@ -10,8 +11,9 @@ class SubjectHomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateBackground(String background) {
+  Future<void> updateBackground(String background) async {
     _currentSubject!['background'] = background;
+    await subjectServiceUpdateBackground(_currentSubject!['id'], background);
     notifyListeners();
   }
 }

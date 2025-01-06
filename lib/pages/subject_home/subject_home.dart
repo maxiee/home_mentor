@@ -35,7 +35,7 @@ class _SubjectHomeState extends State<SubjectHome> {
           ListTile(
             title: const Text('新 Prompt'),
             onTap: () {
-              // Handle navigation to 新 Prompt
+              Navigator.of(context).pushNamed('/subject_new_prompt');
             },
           ),
           ListTile(

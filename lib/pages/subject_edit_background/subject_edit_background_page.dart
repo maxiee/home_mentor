@@ -62,6 +62,12 @@ class _SubjectEditBackgroundPageState extends State<SubjectEditBackgroundPage> {
             await Provider.of<SubjectHomeProvider>(context, listen: false)
                 .updateBackground(
                     jsonEncode(_controller.document.toDelta().toJson()));
+            // Show success message
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('保存成功')),
+              );
+            }
           },
           child: const Icon(Icons.save)),
     );
